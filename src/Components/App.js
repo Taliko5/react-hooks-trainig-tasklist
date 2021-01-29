@@ -18,6 +18,17 @@ const App = () => {
 		setTitle('');
 		setBody('');
 	};
+
+	const deleteAllEvents = (e) => {
+		e.preventDefault();
+		const result = window.confirm('are you sure to delete all events?');
+		if (result) {
+			dispatch({ type: 'DELETE_ALL_EVENTS' });
+		}
+	};
+
+	const unCreatable = title === '' || body === '';
+
 	return (
 		<div className="container-fluid">
 			<h4>form tag</h4>
@@ -42,10 +53,20 @@ const App = () => {
 						onChange={(e) => setBody(e.target.value)}
 					/>
 				</div>
-				<button className="btn btn-primary" onClick={addEvent}>
+				<button
+					className="btn btn-primary"
+					onClick={addEvent}
+					disabled={unCreatable}
+				>
 					create event
 				</button>
-				<button className="btn btn-danger">delete all event</button>
+				<button
+					className="btn btn-danger"
+					onClick={deleteAllEvents}
+					disabled={state.length === 0}
+				>
+					delete all event
+				</button>
 			</form>
 
 			<h4>list of event</h4>
@@ -59,7 +80,9 @@ const App = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{state.map((event, idx) =>  <Event key={idx} event={event} dispatch={dispatch}></Event>)}
+					{state.map((event, idx) => (
+						<Event key={idx} event={event} dispatch={dispatch}></Event>
+					))}
 				</tbody>
 			</table>
 		</div>
