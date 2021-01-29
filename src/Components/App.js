@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reducer from '../reducers';
+import Event from './Event';
 
 const App = () => {
 	const [state, dispatch] = useReducer(reducer, []);
@@ -14,7 +15,6 @@ const App = () => {
 			title,
 			body,
 		});
-		console.log(state);
 		setTitle('');
 		setBody('');
 	};
@@ -57,10 +57,10 @@ const App = () => {
 						<th>body</th>
 						<th></th>
 					</tr>
-					{/* <tbody>
-
-					</tbody> */}
 				</thead>
+				<tbody>
+					{state.map((event, idx) =>  <Event key={idx} event={event} dispatch={dispatch}></Event>)}
+				</tbody>
 			</table>
 		</div>
 	);
