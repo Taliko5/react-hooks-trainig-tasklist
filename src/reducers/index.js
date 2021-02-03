@@ -1,3 +1,4 @@
 import { combineReducers } from 'redux';
 import events from './events';
-export default combineReducers({ events });
+import operationLogs from './operationLogs';
+export default combineReducers({ events, operationLogs });
