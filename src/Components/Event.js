@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../contexts/AppContext';
 import { DELETE_EVENT } from '../actions';
 
-const Event = ({ dispatch, event }) => {
+const Event = ({ event }) => {
 	const id = event.id;
+	const { dispatch } = useContext(AppContext);
 	const handleClickDeleteButton = () => {
 		const result = window.confirm(`are you sure to delete id:${id}'s event?`);
 		if (result) {
 			dispatch({ type: DELETE_EVENT, id });
-		}		
+		}
 	};
 	return (
 		<>
