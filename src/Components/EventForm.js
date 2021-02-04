@@ -7,6 +7,8 @@ import {
 } from '../actions';
 import AppContext from '../contexts/AppContext';
 import { timeCurrentIso8601 } from '../utils';
+import FormInput from './FormInput';
+import TextForm from './TextForm';
 
 const EventForm = () => {
 	const { state, dispatch } = useContext(AppContext);
@@ -44,14 +46,13 @@ const EventForm = () => {
 
 	const deleteAllLogs = (e) => {
 		e.preventDefault();
-		const result = window.confirm("are you sure to delete all logs?")
+		const result = window.confirm('are you sure to delete all logs?');
 		if (result) {
 			dispatch({
 				type: DELETE_ALL_OPERATION_LOG,
-			})
+			});
 		}
-
-	}
+	};
 
 	const unCreatable = title === '' || body === '';
 
@@ -59,26 +60,8 @@ const EventForm = () => {
 		<>
 			<h4>form tag</h4>
 			<form action="">
-				<div className="form-group">
-					<label htmlFor="formEventTitle">title</label>
-					<input
-						type="text"
-						className="form-control"
-						id="formEventTitle"
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="formEventBody">Body</label>
-					<textarea
-						type="text"
-						className="form-control"
-						id="formEventBody"
-						value={body}
-						onChange={(e) => setBody(e.target.value)}
-					/>
-				</div>
+				<FormInput value={title} onChange={setTitle} />
+				<TextForm value={body} onChange={setBody}/>
 				<button
 					className="btn btn-primary"
 					onClick={addEvent}
